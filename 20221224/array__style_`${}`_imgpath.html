@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc</title>
+</head>
+
+<body>
+    <!-- array.html -->
+    <script>
+        //let arr = new Array();
+        let arr = [];
+        arr[0] = 100;
+        arr[1] = 50;
+        //arr[100] = 70;
+        arr.push(70);
+
+        let total = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+            total += arr[i];
+        }
+
+        console.log(total);
+        // console.log(arr);
+        // console.log(arr[2], arr.length);
+
+
+    </script>
+    <div class='t1'></div>
+    <div class='t2'></div>
+    <div class='t3'></div>
+    <script>
+        const elDiv = document.querySelectorAll('.t1,.t2,.t3');
+        // elDiv[0] = '1~31';
+        // elDiv[1] = '24';
+        let content = '';
+
+        // `10${1}`
+        for (let i = 0; i < 31; i++) {
+            content += (`<button>${i + 1} </button>`);
+        }
+        elDiv[0].innerHTML += content;
+
+
+        const elButton = document.querySelectorAll('button');
+        for (let i = 0; i < elButton.length; i++) {
+            console.log(elButton[i].innerHTML == 24);
+            if (elButton[i].innerHTML == 24) {
+                elButton[i].style.color = 'red';
+                elButton[i].addEventListener('click',function(){
+                    elDiv[2].innerHTML += "크리스마스 이브";
+                    elDiv[2].style.color = 'red';
+                })
+                break;
+            }
+        }
+        const path = 'C:/Class/javascript/img';
+        let arr2 = [path + '/01.jfif', path + '/02.jfif'];
+        
+        arr2.forEach(function (url) {
+            elDiv[1].innerHTML += `<img src='${url}'>`;
+        })
+    </script>
+</body>
+
+</html>

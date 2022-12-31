@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- calc_test.html -->
+    <div class="test">
+        <p>js = </p>
+        <p>html = </p>
+        <p>css = </p>
+        <p>총점 = </p>
+        <p>평균 = </p>
+        <p>판정 = </p>
+    </div>
+    <script>
+        const elTest = document.querySelectorAll('.test p');
+        let js = 100, html = 90, css = 70, total, avg, grade;
+        js = parseInt(prompt('JS 점수는?'));        //정수값만 ('10%' -> 10)
+        html = Number(prompt('HTML 점수는?'));      //Number형으로
+        css = Number(prompt('CSS점수는?'));
+
+        total = js + html + css;
+        avg = total / 3;
+        //grade = (avg>=60) ? '합격' : '불합격';
+        if(avg >= 90){
+            grade = 'A';
+        }else if(avg >= 80){
+            grade = 'B';
+        }else{
+            grade = 'F';
+        }
+
+        let data = [js,html,css,total,avg,grade] ;
+
+        for (let index = 0; index < data.length; index++) {
+            elTest[index].innerHTML += data[index];
+        }
+
+    </script>
+</body>
+</html>

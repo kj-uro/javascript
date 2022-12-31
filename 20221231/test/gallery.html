@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        figure {
+            margin: 0;
+            width: 30%
+        }
+
+        img {
+            width: 100%
+        }
+    </style>
+    <article>
+        <h2>gallery</h2>
+        <div>
+            <!-- <figure>
+                <img src='../../img/01.jfif'>
+                <figcaption> 이미지 제목 </figcaption>
+            </figure> -->
+        </div>
+    </article>
+    <div class='popup'>
+        <h2 id='el_title'>이미지 제목</h2>
+        <figure>
+            <img src='../../img/01.jfif' id='el_url'>
+            <figcaption id="el_info">
+                이미지 내용
+            </figcaption>
+        </figure>
+    </div>
+    <style>
+        .popup {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+    </style>
+    <script>
+        let galleryData = [
+            {
+                name: '갤러리 01',
+                url: '../../img/01.jfif',
+                info: '갤러리01 상세내용...'
+            },
+            {
+                name: '갤러리 02',
+                url: '../../img/02.jfif',
+                info: '갤러리02 상세내용...'
+            }
+        ];
+
+        const elGallery = document.querySelector('article> div');
+
+        // 갤러리 제목,이미지 삽입
+        let tagList = '';
+        galleryData.forEach(function (gallery, idx) {
+            tagList += `<figure>
+                            <img src='${gallery.url}' class = "img${idx}">
+                            <figcaption> ${gallery.name} </figcaption>
+                        </figure>`;
+        });
+        elGallery.innerHTML = tagList;
+        // 팝업창 처리
+        const elFigure = document.querySelectorAll('article figure');
+        const elPopup = document.querySelector('.popup');
+
+        //id를 활용한 popup handling
+        elFigure.forEach(function (figure, idx) {
+            figure.onclick = function () {
+
+                elPopup.style = `display:flex`;
+
+                dataChange(idx);
+                // el_title.innerHTML = galleryData[idx].name;
+                // el_url.src = galleryData[idx].url;
+                // el_info.innerHTML = galleryData[idx].info;
+            }
+        });
+
+        //팝업창 바깥쪽 클릭시 팝업제거 과정
+        elPopup.onclick = function (e) {
+            console.log(e.target.className); //이벤트 타겟이 어딘지(어디를 클릭했는지)
+            if (e.target.className == 'popup') {
+                elPopup.style = `display:none`;
+            }
+        }
+
+        //함수
+        //function dataChange(idx){
+        let dataChange = function(idx){
+            el_title.innerHTML = galleryData[idx].name;
+            el_url.src = galleryData[idx].url;
+            el_info.innerHTML = galleryData[idx].info;
+        }
+        
+    </script>
+</body>
+
+</html>

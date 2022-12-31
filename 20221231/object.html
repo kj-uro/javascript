@@ -1,0 +1,49 @@
+<!--object.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*let data = ['홍길동', 400];
+            data[0] // 홍길동;*/
+
+        let data = {
+            name : '홍길동',
+            age : 400,
+            //name-a : '김지환' 몇몇 특수기호는 스크립트에서 인식하지 못함. 문자열 처리 해야함
+            'name-a' : '김지환',
+            color : ['red','blue'],
+            play : function(){
+                console.log(
+                    `${this['name-a']}은 ${this.age}살이다`
+                    );
+            }
+        }
+        data.play();
+        /*
+        console.log(data.name);
+        console.log(data['name-a']);
+        console.log(data.color);
+        */
+
+        // data.color.forEach(function(str,index,arr){
+        //     console.log(arr);
+        // });
+        /*
+        for(let key in data){
+            console.log(data[key])
+        }
+        for(let key of data.color){
+            console.log(key)
+        }
+        */
+    </script>
+    
+</body>
+</html>
