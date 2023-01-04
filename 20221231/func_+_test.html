@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--script>
+        let fun = function () {
+            console.log('실행');
+        }
+
+        window.onclick = fun;
+
+        let fun2 = function (n) {
+            console.log(n);
+        }
+        fun2(10);
+
+        //배열로 받아옴 - 많이 쓰임 
+        let fun3 = function (...data) {
+            console.log(data);      //배열
+            console.log(arguments); //배열아님 (반복문 불가)
+        }
+
+        fun3('홍길동', 400);
+        /*
+        let a = {
+            p: 40,
+            q: true
+        }
+        let{p,q} = a;
+        p <= 40, q<= true;
+        */
+        let fun4 = (...rest) => {    //arrowfunction
+            console.log(rest);
+        }
+        fun4('화살표함수', '일반함수를 간소화한 버전');
+
+        //return 값을 반환 시킴과 동시에 함수 종료
+        let fun5 = () => { return 'rest' }
+        fun5 = () => ('rest'); // return마저 간소화
+        console.log(fun5());
+
+        let num = 0;
+        let fun6 = () => {
+            num++;
+            if (num > 5) return;
+            //console.log(num);
+            fun6();
+        }
+
+        fun6();
+    </script-->
+
+    <article class="f1">
+        <h2>
+            <button data-name="incre">증가</button>
+            <button data-name="decre">감소</button> <!-- data-(임의) -->
+        </h2>
+        <div>
+            <img src="../img/01.jfif">
+        </div>
+    </article>
+    <style>
+        img {
+            width: 100px;
+            transition: .5s;
+        }
+
+        /* 변환 속도 */
+        article {
+            margin: 100px 0;
+        }
+    </style>
+
+    <script>
+        const elF1 = document.querySelector('.f1 img'),
+            elbtn = document.querySelectorAll('.f1 button');
+
+        let locateX = 0, width = 100;
+
+        let anifun = function(){
+            //console.log(event.target.textContent);
+            //console.log(event.target.innerHTML);
+
+            console.log(
+                this
+            ); // 콘솔로그 안에서 this사용시 윈도우를 가르킴(화살표함수일때..) 일반함수일때 this사용가능
+
+            elF1.style = `transform:translateX(${locateX}px); width: ${width}px`; //X 좌표 변경
+        }
+        elbtn[0].onclick = function(){
+            anifun();
+        }
+        elbtn[1].onclick = function(){
+            anifun();
+        }
+
+
+
+    </script>
+
+    <div class="self">
+        <h2>클릭 & 스타일</h2>
+        <div>
+            <button data-do="open">열기</button>
+            <button data-do="close">닫기</button>
+        </div>
+        <div id="content">
+            컨텐츠 내용...
+        </div>
+        <style>
+        #content{padding: 60px; border: 1px solid #000; display: block;}
+        </style>
+    </div>
+    <script>
+        const elbutton = document.querySelectorAll('.self button');
+        const elContent = document.querySelector('#content');
+            console.log(elContent);
+
+        let funDo = function(){
+            if(this.dataset.do === 'open'){
+                elContent.style= `display:block`;
+            }else if(this.dataset.do === 'close'){
+                elContent.style= `display:none`;
+            }
+        };
+        elbutton[0].onclick = funDo;
+        elbutton[1].onclick = funDo;
+    </script>
+</body>
+
+</html>
