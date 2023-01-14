@@ -1,0 +1,30 @@
+html, body{margin: 0;}
+*{
+    box-sizing: border-box;
+}
+
+#contents{
+    border: 5px solid #f00;
+}
+
+#contents img{
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+#contents img.active{
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+header{
+    position:fixed; left: 0; top:0;
+    width:100%; height:60px;
+    background-color: #000;
+    z-index: 9999;
+    transition: 1s;
+}
+header.active{
+    transform: translateY(-100%);
+}

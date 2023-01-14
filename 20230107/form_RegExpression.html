@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- form.html -->
+    <!-- type => 체크 , text
+    유효성 검사
+    submit -->
+    <form
+      id="check"
+      action="http://naver.com"
+      method="get"
+      enctype="multipart/form-data"
+    >
+      <article>
+        <h2>동의 페이지</h2>
+        <div>
+          <p><input type="checkbox" name="terms" />약관동의</p>
+          <p><input type="checkbox" name="privacy" />개인정보수집동의</p>
+          <p><input type="checkbox" name="all" />전체동의</p>
+        </div>
+        <input type="submit" value="확인" />
+      </article>
+    </form>
+    <script>
+      const elCheckbox = document.querySelectorAll("input[type=checkbox]"); //체크박스가 추가될경우 문제가 될 수 있다.
+      //console.log(elCheckbox);
+      elCheckbox[2].addEventListener("click", () => {
+        //약관동의,개인정보 수집동의
+        let allState = elCheckbox[2].checked;
+        elCheckbox[0].checked = allState;
+        elCheckbox[1].checked = allState;
+      });
+      window.addEventListener("submit", function () {
+        event.preventDefault(); //다음 페이지로 넘어가려는것을 막아줄 수 있다.
+
+        //약관동의가 안되어있을경우
+        if (
+          !elCheckbox[0].checked //체크박스 체크 유무 bool형
+        ) {
+          alert("약관동의를 체크해주세요");
+          return;
+        }
+        if (
+          !elCheckbox[1].checked //체크박스 체크 유무 bool형
+        ) {
+          alert("개인정보수집동의를 체크해주세요");
+          return;
+        }
+        check.submit(); //submit 실행
+      });
+    </script>
+    <!-- 인풋박스와 라벨의 연결 -->
+    <div class="swich">
+      <input id="test" type="checkbox" />
+      <label for="test"><span></span></label>
+    </div>
+    <style>
+      .swich {
+        border: 1px solid #000;
+        padding: 50px;
+      }
+
+      .swich label {
+        width: 60px;
+        height: 20px;
+        background-color: #aaa;
+        border-radius: 20px;
+        display: block;
+      }
+      .swich label span {
+        width: 20px;
+        height: 20px;
+        background-color: #000;
+        border-radius: 20px;
+        display: block;
+        transition: 0.3s;
+      }
+      .swich input{display: none;}
+      .swich input:checked  + label{/*+는 밑에있는 요소를 가르킴*/
+        background-color: red;
+      }
+      .swich input:checked  + label span{
+        margin-left: 40px;
+      }
+    </style>
+
+    <div>
+        <h2>유효성 검사</h2><!--https://regexr.com/-->
+        <form id="member">
+            <p><input type="text" name="id" id="id" placeholder="아이디"></p>
+            <p><input type="email" name="email" id="email" placeholder="이메일"></p>
+            <p><input type="tel" name="tel" id="tel" placeholder="전화번호"></p>
+            
+            <p><input type="submit" value="확인"></p>
+        </form>
+    </div>
+    <script>
+        let RegEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        let RegId = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;;
+        let RegTel = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+
+        window.addEventListener('submit',()=>{
+            
+            // 정규식.test(검증할문자); => true , false
+            if(!RegId.test(id.value)){
+              console.log('아이디가 틀렸습니다');
+              id.value='';
+              id.focus();
+              return;
+            }if(!RegEmail.test(email.value)){
+              console.log('이메일이 틀렸습니다');
+              return;
+            }if(!RegTel.test(tel.value)){
+              console.log('전화번호가 틀렸습니다');
+              return;
+            }
+            member.action = 'http://google.com';
+            member.submit();
+        })
+    </script>
+  </body>
+</html>

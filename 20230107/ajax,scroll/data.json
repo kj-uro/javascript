@@ -1,0 +1,13 @@
+{
+    "movies":[
+        {"id":0,"subject":"아바타", "poster":"../../img/01.jpg"},
+        {"id":1,"subject":"슬램덩크", "poster":"../../img/02.jpg"},
+        {"id":2,"subject":"영웅", "poster":"../../img/03.jpg"},
+        {"id":3,"subject":"영웅", "poster":"../../img/04.jpg"},
+        {"id":4,"subject":"영웅", "poster":"../../img/05.jpg"},
+        {"id":5,"subject":"영웅", "poster":"../../img/06.jpg"}
+    ],
+    "music":[
+        {},{},{}
+    ]
+}

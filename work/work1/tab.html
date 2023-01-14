@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab {
+            margin: 200px auto;
+            width: 700px;
+        }
+
+        .tab button {
+            padding: 10px 30px;
+            margin-bottom: 10px;
+        }
+
+        .tab button.on {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .tab .content {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #000;
+        }
+
+        .tab .content figure {
+            width: 40%;
+            margin: 0;
+        }
+
+        .tab .content figure img {
+            width: 100%;
+            height: 150px;
+        }
+
+        .tab .content article {
+            width: 50%;
+            padding-left: 5%;
+        }
+
+        .tab .content>div {
+            font-size: 3rem;
+            display: none;
+        }
+
+        .tab .content>div.on {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- contents폴더 > tab.html -->
+    <article class="tab">
+        <div class="content">
+            <!-- <figure><img src="./img/01.jpg"></figure>
+            <article>
+                <h2>이미지 01</h2>
+                <div>이미지 01(상세내용....)</div>
+            </article> -->
+        </div>
+        <div class="button">
+            <button data-do="Pre"> Pre </button>
+            <button data-do="Detail"> Detail </button>
+            <button data-do="Next"> Next </button>
+        </div>
+    </article>
+    <div class='popup'>
+        <h2 id='pop_title'>이미지 제목</h2>
+        <figure>
+            <img src='주소' id='pop_url' style="width:50%">
+            <figcaption id="pop_info">
+                이미지 내용
+            </figcaption>
+        </figure>
+    </div>
+    <style>
+        .popup {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+    </style>
+    <script>
+        const elContent = document.querySelector('.content'),
+            elBtns = document.querySelector('.button');
+
+        let idx = 0;
+
+
+        let data = [
+            { name: '이미지 01', detail: '이미지 01(상세내용....)', src: './img/01.jpg' },
+            { name: '이미지 02', detail: '이미지 02(상세내용....)', src: './img/02.jpg' },
+            { name: '이미지 03', detail: '이미지 03(상세내용....)', src: './img/03.jpg' },
+            { name: '이미지 04', detail: '이미지 04(상세내용....)', src: './img/04.jpg' },
+            { name: '이미지 05', detail: '이미지 05(상세내용....)', src: './img/05.jpg' },
+            { name: '이미지 06', detail: '이미지 06(상세내용....)', src: './img/06.jpg' },
+            { name: '이미지 07', detail: '이미지 07(상세내용....)', src: './img/07.jpg' },
+            { name: '이미지 08', detail: '이미지 08(상세내용....)', src: './img/08.jpg' },
+            { name: '이미지 09', detail: '이미지 09(상세내용....)', src: './img/09.jpg' },
+            { name: '이미지 10', detail: '이미지 10(상세내용....)', src: './img/10.jpg' }
+        ];
+        //찾아가기 버튼 추가
+        elBtns.innerHTML+=(`<div>`);
+        data.forEach(function(data,i){
+            elBtns.innerHTML+=(`<button style="width :10px">${i+1}</button>`);
+        });
+        elBtns.innerHTML+=(`</div>`);
+        const elBtn = document.querySelectorAll('.tab button');
+        //버튼 클릭에 따른 증감처리
+        let fn_ClickEvent = function () {
+            if (this.dataset.do === "Pre") {
+                idx--;
+                idx = idx<0 ? data.length-1 : idx;
+            } else if (this.dataset.do === "Detail") {
+                fn_SetPopup();
+                return;
+            } else if (this.dataset.do === "Next") {
+                idx++;
+                idx = idx>=data.length ? 0 : idx;
+            } else{
+                idx = this.innerHTML -1;
+                fn_ChangeData();
+            }
+            fn_ChangeData();
+        }
+        // 팝업처리
+        let popTitle = document.querySelector('#pop_title');
+        let popImgURL = document.querySelector('#pop_url');
+        let pop_info = document.querySelector('#pop_info');
+        let pop = document.querySelector('.popup');
+        
+        let fn_SetPopup = function(){
+
+            popTitle.innerHTML = data[idx].name;
+            popImgURL.src = data[idx].src;
+            pop_info.innerhtml = data[idx].detail;
+
+            pop.style = `display:block`;
+        }
+        pop.onclick = function (e) {
+            if (e.target.className == 'popup') {
+                pop.style = `display:none`;
+            }
+        }
+        //증감된 idx로 이미지 로딩처리
+        let fn_ChangeData = function(){
+            elContent.innerHTML = `
+            <figure><img src="${data[idx].src}" class='img' data-do='Detail'></figure>
+            <article>
+                <h2>${data[idx].name}</h2>
+                <div>${data[idx].detail}</div>
+            </article>`;
+        }
+
+        //버튼 클릭이벤트 추가
+        elBtn.forEach(function (btn) {
+            btn.onclick = fn_ClickEvent;
+        });
+        //데이터 로딩 
+        fn_ChangeData();
+        //이미지 클릭이벤트 추가
+        const elImg = document.querySelector('.img');
+        elImg.onclick = fn_ClickEvent;
+        console.log(elBtn);
+    </script>
+
+
+
+
+
+</body>
+
+</html>
