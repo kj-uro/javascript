@@ -1,15 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      localStorage.num = 100;
-      
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    ////////////// 맨아래에 요약있음///////////////
+    //   localStorage.num = 100;
+    //   sessionStorage.num = 1000;
+    localStorage.setItem("num", 100); //추가, 수정
+    localStorage.getItem("num"); //받아오기
+    localStorage.removeItem("num"); //삭제
+    //localStorage.clear();               //전체삭제
+
+    sessionStorage.setItem("num", 1000);
+  </script>
+
+  <div>
+    <figure>
+      <a href="./storagePage.html">
+        <img src="../img/03.jpg" />
+      </a>
+      <button id="plus">좋아요</button>
+    </figure>
+  </div>
+
+  <script>
+    let count = localStorage.getItem("count") || 0; //앞쪽이 null이 아니라면 0을 넣어준다.!!!!
+    plus.onclick = () => {
+      count++;
+      localStorage.setItem("count", count);
+    };
+  </script>
+
+  <div></div>
+  <script>
+    let data = [{ num: 100, name: "나그네" }];
+
+    localStorage.data = JSON.stringify(data);
+  </script>
+
+  <div id="popup">
+    <input type="checkbox" id="check" /> 오늘하루동안보지않기
+    <button id="btnClose">닫기</button>
+  </div>
+  <style>
+    #popup {
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+  </style>
+  <script>
+    let today = new Date();
+
+    console.log(today.getFullYear());
+    console.log(today.getMonth() + 1); //0~11
+    console.log(today.getDate());
+    console.log(["일", "월", "화", "수", "목", "금", "토"][today.getDay()]); //0~6 일월화수목금토
+
+    console.log(today.getHours()); //시
+    console.log(today.getMinutes()); //분
+    console.log(today.getSeconds()); //초
+
+    console.log(today.getTime()); //1970 1 1 부터 ms
+
+    btnClose.onclick = () => {
+      popup.style.display = "none";
+      if (check.checked) {
+        let today = new Date();
+        today.setSeconds(today.getSeconds() + 10);
+
+        today.toUTCString(); //문자열 형식으로 전환(표준 UTC 시간)
+
+        document.cookie = `popup=event;expires=${today.toUTCString()}`;
+      }
+    };
+
+    if(document.cookie.match('popup')){
+      popup.style.display = 'none';
+    }else{
+      popup.style.display = 'flex';
+    }
+
+    //쿠키에 값이 있다면 팝업창은 none상태 유지
+    //쿠키에 값이 없다면 block으로 변경
+
+    //날짜 처리 참고
+    let startDay = new Date('2022-12-24');
+    let endDay = new Date('2023-03-04');
+    let oneday = 24*60*60*1000;
+
+    
+
+    console.log((endDay-startDay)/oneday);
+
+  </script>
+</body>
+
 </html>
+<!--  요약
+document.cookie = `popup=event;expires=${today.toUTCString()}`;   //쿠키설정
+localStorage.setItem("num", 100);                                 //추가, 수정
+localStorage.getItem("num");                                      //받아오기
+localStorage.removeItem("num");                                   //삭제
+JSON.stringify()    오브젝트를 문자열로
+JSON.parse()        문자열을 오브젝트 타입으로
+-->

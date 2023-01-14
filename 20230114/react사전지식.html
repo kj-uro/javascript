@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="re">
+      <!-- <p>
+            홍길동/400
+            <button class="modify">수정</button>
+            <button class="delete">삭제</button>
+        </p> -->
+    </div>
+    <!--script>
+        데이터 => 숫자, 문자, 배열, 객체
+        제어문 => if, for, foreach / map, filter
+
+        함수개념 / 클래스 개념
+        함수
+        const fn = (매개변수) => {프로그래밍 ..}
+              fn(인자값)
+        
+              페이지 구성방식 *SPA (single page Application) -> CSR (Client Side Rendering) -> 
+                             단점 - JS를 번들링해서 받기때문에 초기 구동속도가 느리다, 검색엔진최적화어려움(SSR로 가능) 보안이슈, 
+                             장점 - 깜박임없음, 필요한 리소스만 부분적로딩(성능), 쿠키말고는 사용자에 대한 정보를 저장할 공간이 마땅치않다.
+                             MPA (Multiple Page Application) -> SSR (Server Side Rendering) -> 
+                             단점 - 페이지 이동시 깜빡임, 매요청마다 리로딩 발생, 불필요한 템플릿도 중복해서 로딩, 그에따른 부하, 모바일 개발시 추가적인 백엔드작업 필요
+                             장점 - SEO(검색엔진) 관점에서 유리(데이터가 다 들어있어서) 첫로딩이 매우 짧다.
+
+        클래스 생성
+    </!--script-->
+    <script>
+      // let a = 10;
+      // let [b, c, ...d] = [100, 200, 300, 400, 500, 600];
+      //b=100, c=200, d=[300,400,500,600];
+      //let {num,name,...aaa} = {num:100, name:'홍길동',age:500,address,email};
+      //num = {num:100}, name = {name:100}, aaa = {age:500,address,email};
+      let data = [
+        {
+          num: 100,
+          name: "홍길동",
+          age: 500,
+        },
+        { num: 200, name: "홍길동", age: 500 },
+        { num: 300, name: "홍길동", age: 500 },
+      ];
+
+      data.forEach(() => {}); // return이 없다.
+
+      let copy = data.map((obj, key) => {
+        // **map 배열을 만들어서 배열에 값을 *쌓아* 반환한다
+        if (obj.num === 100) {
+          // 작성방법은 foreach 와 같다.
+          return obj;
+        }
+      });
+      //copy = [{num: 100,name: '홍길동',age: 500,address, email}]
+
+      let 찾고싶을때 = data.filter((obj, key) => {
+        // **filter  비교문을 return한다.
+        //비교문                                            말그대로 필터기능. 배열을 반환한다.
+        return obj.num > 100;
+      });
+      //찾고싶을때 = [{ num: 200, name: '홍길동', age: 500, address, email },{ num: 300, name: '홍길동', age: 500, address, email }]
+
+      let data2 = [
+        {
+          id: 0,
+          name: "홍길동",
+          age: 500,
+        },
+        { id: 1, name: "홍길순", age: 200 },
+        { id: 2, name: "홍길남", age: 500 },
+      ];
+      function insert() {
+        re.innerHTML = "";
+        data2.forEach((obj) => {
+          re.innerHTML += `<p>
+                ${obj.name}/${obj.age}
+                <button class="modify" onclick="javascript:modify(${obj.id})">수정</button>
+                <button class="delete" onclick="javascript:remove(${obj.id})">삭제</button>
+            </p>`;
+        });
+      }
+      insert();
+
+      function modify(id) {
+        data2 = data2.map((obj) =>
+          obj.id === id ? { ...obj, name: `${obj.name} - 수정됨` } : obj
+        ); //{...... name:길동남 , name:길동순 } ----덮어쓰기!!!
+        // let edit = data2.map((obj, key) => {
+        //     if (id === obj.id) {
+        //         obj.name = `${obj.name} - 수정됨`;
+        //     }
+        //     return obj;
+        // })
+        // data2 = edit;
+        insert();
+      }
+      function remove(id) {
+        data2 = data2.filter((obj) => obj.id !== id); //중괄호를 안써서 return도 생략 자동으로 (obj.id!==id)가 return됨
+        // let del = data2.filter((obj, key) => {
+        //     return (obj.id !== id);
+        // })
+        // data2 = del;
+        insert();
+      }
+    </script>
+  </body>
+</html>
